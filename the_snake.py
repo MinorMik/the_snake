@@ -1,7 +1,6 @@
-from random import choice, randint
+from random import randint
 
 import pygame
-
 
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
@@ -41,6 +40,10 @@ clock = pygame.time.Clock()
 
 
 class GameObject:
+    '''
+    Основной клас.
+    '''
+    
     def __init__(self, position=(0, 0), body_color=None):
         self.position = position
         self.body_color = body_color
@@ -49,6 +52,8 @@ class GameObject:
         pass
 
 class Apple(GameObject):
+    '''Описываем яблоко'''
+    
     body_color = APPLE_COLOR
 
     def __init__(self):
@@ -56,7 +61,7 @@ class Apple(GameObject):
         self.randomize_position()
 
     def randomize_position(self):
-        """Генерирует случайную позицию для яблока."""
+        '''Генерирует случайную позицию для яблока.'''
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE
@@ -68,6 +73,8 @@ class Apple(GameObject):
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
 class Snake(GameObject):
+    '''Описываем змейку'''
+    
     body_color = SNAKE_COLOR
 
     def __init__(self):
@@ -85,6 +92,7 @@ class Snake(GameObject):
             self.next_direction = None
 
     def move(self, ate_food=False):
+        '''Получаем текущее положение головы и смещаем на клетку в нужном направлении'''
         head_x, head_y = self.get_head_position()
         dx, dy = self.direction
         new_head = (head_x + dx * GRID_SIZE, head_y + dy * GRID_SIZE)
@@ -111,9 +119,11 @@ class Snake(GameObject):
         return True
 
     def get_head_position(self):
+        '''Возвращаем позицию головы'''
         return self.positions[0]
 
     def reset(self):
+        '''При активации сбрасываем настройки в начало'''
         center = (GRID_WIDTH // 2 * GRID_SIZE, GRID_HEIGHT // 2 * GRID_SIZE)
         self.positions = [center]
         self.direction = RIGHT
@@ -131,7 +141,9 @@ class Snake(GameObject):
             pygame.draw.rect(screen, self.body_color, rect)
             pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
+
 def handle_keys(snake):
+    '''Проверка нажатия клавиш'''
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -145,6 +157,7 @@ def handle_keys(snake):
                 snake.next_direction = LEFT
             elif event.key == pygame.K_RIGHT and snake.direction != LEFT:
                 snake.next_direction = RIGHT
+
 
 def main():
     pygame.init()
@@ -181,6 +194,6 @@ def main():
 
         pygame.display.update()
 
+
 if __name__ == '__main__':
     main()
-

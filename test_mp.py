@@ -1,8 +1,8 @@
 # Аннотируем параметр функции: "значение name должно быть типа str!"
-#def we_crash_all(name: str):
-    #return 'Привет, ' + name + ', мы всё сломали!'
+# def we_crash_all(name: str):
+    # return 'Привет, ' + name + ', мы всё сломали!'
 
-#print(we_crash_all(True))
+# print(we_crash_all(True))
 
 def calculate_sum_and_average(numbers):
     total_sum = 0
@@ -11,7 +11,6 @@ def calculate_sum_and_average(numbers):
 
     average = total_sum // len(numbers)
     return total_sum, average
-
 
 numbers = [10, 20, 30, 40, 50]
 total, avg = calculate_sum_and_average(numbers)
