@@ -1,4 +1,5 @@
 from random import randint
+
 import pygame
 
 # Константы для размеров поля и сетки
@@ -46,6 +47,7 @@ class GameObject:
         self.body_color = body_color
 
     def draw(self):
+        '''Заглушка для методов дочерних класов'''
         pass
 
 
@@ -66,6 +68,7 @@ class Apple(GameObject):
         )
 
     def draw(self):
+        '''Отрисовка яблока'''
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
@@ -86,13 +89,14 @@ class Snake(GameObject):
         self.last = None  # Последний сегмент для удаления
 
     def update_direction(self):
+        '''Определяем направление'''
         if self.next_direction:
             self.direction = self.next_direction
             self.next_direction = None
 
     def move(self, ate_food=False):
         """
-        Получает текущее положение головы и смещает на клетку в нужном направлении.
+        Получает текущее положение головы и смещает в нужном направлении.
 
         Возвращает False, если произошло столкновение или выход за границы.
         """
@@ -137,6 +141,7 @@ class Snake(GameObject):
         self.next_direction = None
 
     def draw(self):
+        '''Отрисовка змейки'''
         # Затираем последний сегмент
         if self.last:
             last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
