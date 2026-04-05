@@ -44,11 +44,9 @@ class GameObject:
 class Apple(GameObject):
     """Описывает яблоко."""
 
-
     def __init__(self) -> None:
         super().__init__(body_color=APPLE_COLOR)
         self.randomize_position([CENTER])
-
 
     def randomize_position(self, used_position) -> None:
         """Генерирует случайную позицию для яблока."""
@@ -67,10 +65,8 @@ class Apple(GameObject):
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
-
 class Snake(GameObject):
     """Описывает змейку."""
-
 
     def __init__(self) -> None:
         super().__init__(body_color=SNAKE_COLOR)
@@ -146,6 +142,7 @@ def handle_keys(snake) -> tuple[int, int] | None:
 
 def main()  -> None:
     """Запускает основной игровой цикл."""
+
     pygame.init()
     snake = Snake()
     apple = Apple()
@@ -170,10 +167,10 @@ def main()  -> None:
             snake.length += 1
 
         # Игра окончена — перезапускаем
-        if snake.length == GRID_SIZE ** 2 or snake.get_head_position() in snake.positions[1:]:
+        if (snake.length == GRID_SIZE ** 2
+                or snake.get_head_position() in snake.positions[1:]):
             snake.reset()
             apple.randomize_position(snake.positions)
-
 
         # Отрисовка
         snake.draw()
