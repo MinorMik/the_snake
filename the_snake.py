@@ -91,7 +91,7 @@ class Snake(GameObject):
         new_head_x = (head_x + dx * GRID_SIZE) % SCREEN_WIDTH
         new_head_y = (head_y + dy * GRID_SIZE) % SCREEN_HEIGHT
         # Сохраняем координаты в начало змейки
-        self.positions.insert (0,(new_head_x, new_head_y))
+        self.positions.insert(0, (new_head_x, new_head_y))
         # Если не съели яблоко - удаляем хвост.
         if self.length < len(self.positions):
             self.last = self.positions.pop()
