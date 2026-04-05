@@ -65,6 +65,7 @@ class Apple(GameObject):
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
+
 class Snake(GameObject):
     """Описывает змейку."""
 
@@ -90,12 +91,12 @@ class Snake(GameObject):
         new_head_x = (head_x + dx * GRID_SIZE) % SCREEN_WIDTH
         new_head_y = (head_y + dy * GRID_SIZE) % SCREEN_HEIGHT
         # Сохраняем координаты в начало змейки
-        self.positions.insert (0, (new_head_x, new_head_y))
+        self.positions.insert (0,(new_head_x, new_head_y))
         # Если не съели яблоко - удаляем хвост.
         if self.length < len(self.positions):
             self.last = self.positions.pop()
 
-    def get_head_position(self) -> tuple(int, int):
+    def get_head_position(self) -> tuple[int, int]:
         """Возвращает позицию головы."""
         return self.positions[0]
 
@@ -140,9 +141,8 @@ def handle_keys(snake) -> tuple[int, int] | None:
                 return None
 
 
-def main()  -> None:
+def main() -> None:
     """Запускает основной игровой цикл."""
-
     pygame.init()
     snake = Snake()
     apple = Apple()
